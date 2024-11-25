@@ -26,7 +26,7 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
         <form action="">
             <h1>Register</h1>
             <div class="form-group">
@@ -39,14 +39,18 @@
             </div>
             <div class="form-group">
                 <label for="pwd">Password</label>
-                <input type="password" name="pwd" maxlength="10" class="form-control" required/>
+                <input id="password-input" type="password" name="pwd" class="form-control" required/>
+                <div id="password-container">
+                </div>
             </div>
             <div class="form-group">
                 <label for="confirm-pwd">Confirm Password</label>
-                <input type="password" name="confirm-pwd" maxlength="10" class="form-control" required/>
+                <input id="password-confirm-input" type="password" name="confirm-pwd"  class="form-control" required/>
+                <div id="password-confirm-container">
+                </div>
             </div>
             <input type="submit" class="buttons" value="Register" />
-            <a href="Login.php">Already have an account? Log in</a>
+            <a href="Login.html">Already have an account? Log in</a>
         </form>
     </div>
     <script src="register.js"></script>

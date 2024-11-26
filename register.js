@@ -13,7 +13,7 @@
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       alert('Registration successful!');
-      window.location.href = 'login.html'; // Redirect to the login page
+      window.location.href = 'login.php'; // Redirect to the login page
     } catch (error) {
       alert(error.message);
     }

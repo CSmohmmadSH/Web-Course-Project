@@ -7,7 +7,7 @@ document.querySelector('form').addEventListener('submit', async (e) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       alert('Login successful!');
-      window.location.href = 'home.html'; // Redirect to the home page
+      window.location.href = 'home.php'; // Redirect to the home page
     } catch (error) {
       alert(error.message);
     }

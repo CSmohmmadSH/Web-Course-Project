@@ -1,0 +1,52 @@
+.menu a{
+    
+    margin-left: 0px;
+    }
+    
+    .profile {
+        margin-left: 0px;
+    }
+    
+    .admin-section {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .admin-section h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    
+    .admin-section label {
+        display: block;
+        margin-top: 15px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .admin-section input, .admin-section textarea, .admin-section button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    .admin-section button {
+        background-color: #00c3ff;
+        color: white;
+        cursor: pointer;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    
+    .admin-section button:hover {
+        background-color: #007bff;
+    }
+    

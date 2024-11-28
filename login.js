@@ -6,8 +6,12 @@ document.querySelector('form').addEventListener('submit', async (e) => {
 
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      alert('Login successful!');
-      window.location.href = 'home.php'; // Redirect to the home page
+      if (email === "mohmmad521@hotmail.com"){
+        window.location.href = 'adminPage.php';
+      } else {
+        window.location.href = 'home.php'; 
+
+      }
     } catch (error) {
       alert(error.message);
     }

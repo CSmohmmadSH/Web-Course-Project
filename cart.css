@@ -33,3 +33,42 @@
     font-weight: bold;
     margin-top: 20px;
 }
+
+.cart-details {
+    margin-left: 20px;
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.remove-button:hover {
+    background-color: darkred;
+}
+
+form {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.order-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.order-button:hover {
+    background-color: #45a049;
+}
+

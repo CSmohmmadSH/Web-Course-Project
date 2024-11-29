@@ -4,7 +4,7 @@
 
     <header class="header">
         <div class="logo">
-            <a href="home.php">           
+            <a href="adminPage.php">           
                 <img src="photos/image-removebg-preview.png" alt="Logo"> 
             </a>       
         </div>

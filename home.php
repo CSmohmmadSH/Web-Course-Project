@@ -1,44 +1,58 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php'; 
+include 'DataBase.php'; 
+?>
+
 <head>
-    <title>drop shipping website</title>
+    <title>Drop Shipping Website</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <main>
-        <section class="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="photos/soundcore Anker P20i.webp" alt="Product 1">
-                    <h3>Soundcore by Anker P20i True Wireless Earbuds, 10mm Drivers</h3>
-                    <p>$49.99</p>
-                    <button>Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="photos/Apple iPhone 16 Pro Max (256 GB) - Natural Titanium.webp" alt="Product 2">
-                    <h3>Apple iPhone 16 Pro Max (256 GB) - Natural Titanium</h3>
-                    <p>$799.99</p>
-                    <button>Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="photos/Garmin Forerunner 55 Hrm with Gps Watch, Black.jpg" alt="Product 3">
-                    <h3>Garmin Forerunner 55 Hrm with Gps Watch, Black</h3>
-                    <p>$199.99</p>
-                    <button>Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="photos/HyperX Cloud III – Wired Gaming Headset.webp" alt="Product 4">
-                    <h3>HyperX Cloud III - Wired Gaming Headset</h3>
-                    <p>$99.99</p>
-                    <button>Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="photos/Sony BRAVIA 55 Inch LED TV 4K UHD HDR Smart.jpg" alt="Product 5">
-                    <h3>Sony BRAVIA 55 Inch LED TV 4K UHD HDR Smart</h3>
-                    <p>$999.99</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </main>
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <?php
+            // Fetch product data
+            $query = "SELECT product_id, name, price, stock, image_url FROM products";
+            $result = mysqli_query($conn, $query);
 
-    <?php include 'footer.php'; ?>
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Determine stock status class
+                $stockClass = ($row['stock'] < 5) ? "low-stock" : "stock";
+                $outOfStock = $row['stock'] == 0; // Check if stock is 0
+
+                // Display product details
+                echo "
+                    <div class='product-card'>
+                        <div class='product-image'>
+                            ";
+                
+                // Display product image if not out of stock
+                if ($outOfStock) {
+                    echo "<p class='out-of-stock'>Out of Stock</p>";
+                } else {
+                    // Fetch the image URL from the database and display it
+                    $imageUrl = $row['image_url']; // This assumes the URL is correct
+                    echo "<img src='{$imageUrl}' alt='{$row['name']}'>";
+                }
+
+                echo "
+                        </div>
+                        <h3>{$row['name']}</h3>
+                        <p>Price: \${$row['price']}</p>
+                        <p class='{$stockClass}'>Stock: {$row['stock']} pieces</p>
+                        <form method='POST' action='cart.php'>
+                            <input type='hidden' name='product_id' value='{$row['product_id']}'>
+                            <input type='number' name='quantity' value='1' min='1' max='{$row['stock']}' " . ($outOfStock ? "readonly" : "") . ">
+                            <button type='submit' name='add_to_cart' " . ($outOfStock ? "disabled" : "") . ">Add to Cart</button>
+                        </form>
+                    </div>
+                ";
+            }
+            ?>
+        </div>
+    </section>
+</main>
+
+<?php include 'footer.php'; ?>

@@ -1,0 +1,86 @@
+.payment-page {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.payment-page h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.payment-page p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adds space between form fields */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4CAF50; /* Green border when focused */
+    outline: none;
+}
+
+.pay-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.pay-button:hover {
+    background-color: #45a049;
+}
+
+.pay-button:active {
+    background-color: #388e3c;
+}
+
+.payment-page input[type="text"], .payment-page input[type="number"], .payment-page input[type="month"] {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+.payment-page .payment-form {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

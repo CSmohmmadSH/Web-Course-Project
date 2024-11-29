@@ -15,28 +15,35 @@ if (isset($_POST['add_to_cart'])) {
     $quantity = intval($_POST['quantity']);
 
     // Check if the product is already in the cart
-    if (isset($_SESSION['cart'][$productId])) {
-        $_SESSION['cart'][$productId]['quantity'] += $quantity;
-    } else {
-        $query = "SELECT name, price, stock FROM products WHERE product_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $productId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $product = $result->fetch_assoc();
-
-        if ($product) {
-            $_SESSION['cart'][$productId] = [
-                'name' => $product['name'],
-                'price' => $product['price'],
-                'quantity' => $quantity,
-                'stock' => $product['stock']
-            ];
+    if (isset($_POST['add_to_cart'])) {
+        $productId = intval($_POST['product_id']);
+        $quantity = intval($_POST['quantity']);
+    
+        // Check if the product is already in the cart
+        if (isset($_SESSION['cart'][$productId])) {
+            $_SESSION['cart'][$productId]['quantity'] += $quantity;
         } else {
-            echo "<p style='color: red;'>Error: Product not found.</p>";
+            $query = "SELECT name, price, stock, image_url FROM products WHERE product_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $productId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $product = $result->fetch_assoc();
+    
+            if ($product) {
+                $_SESSION['cart'][$productId] = [
+                    'name' => $product['name'],
+                    'price' => $product['price'],
+                    'quantity' => $quantity,
+                    'stock' => $product['stock'],
+                    'image_url' => $product['image_url'] // Add image_url to session
+                ];
+            } else {
+                echo "<p style='color: red;'>Error: Product not found.</p>";
+            }
         }
+        echo "<p style='color: green;'>Item added to cart successfully!</p>";
     }
-    echo "<p style='color: green;'>Item added to cart successfully!</p>";
 }
 
 // Handle the "Remove from Cart" form submission
@@ -73,8 +80,8 @@ foreach ($_SESSION['cart'] as $productId => $item) {
 // Store the total price in session
 $_SESSION['cart_total'] = $totalPrice;
 
-// Display cart contents
 ?>
+
 <head>
     <title>Your Cart</title>
     <link rel="stylesheet" href="cart.css">
@@ -87,9 +94,10 @@ $_SESSION['cart_total'] = $totalPrice;
             if (!empty($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $productId => $item) {
                     $itemTotal = $item['price'] * $item['quantity'];
+                    $imagePath = $item['image_url']; // Get the image URL from the session
                     echo "
                         <div class='cart-item'>
-                            <img src='photos/{$item['name']}.webp' alt='{$item['name']}'>
+                            <img src='{$imagePath}' alt='{$item['name']}'>
                             <div class='cart-details'>
                                 <p><strong>{$item['name']}</strong></p>
                                 <p class='cart-price'>\${$itemTotal} <span>for ({$item['quantity']}) items</span></p>
@@ -106,7 +114,7 @@ $_SESSION['cart_total'] = $totalPrice;
                             </div>
                         </div>
                     ";
-                }
+                }                
             } else {
                 echo "<p>Your cart is empty.</p>";
             }

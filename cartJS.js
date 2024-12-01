@@ -51,3 +51,35 @@ cartItems.forEach((cartItem, index) => {
       
     });
 });
+
+document.querySelectorAll(".quantity").forEach(quantityInput => {
+    quantityInput.addEventListener("change", (event) => {
+        const form = event.target.closest("form");
+        const productId = form.querySelector("input[name='product_id']").value;
+        const newQuantity = event.target.value;
+
+        const formData = new FormData();
+        formData.append("product_id", productId);
+        formData.append("quantity", newQuantity);
+
+        fetch("updateCart.php", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the item's total price
+                const itemTotalElement = form.closest(".cart-item").querySelector(".cart-price");
+                itemTotalElement.innerText = `$${data.itemTotal.toFixed(2)} for (${newQuantity}) items`;
+
+                // Update the cart total
+                document.getElementById("cartTotal").innerText = `Total: $${data.cartTotal.toFixed(2)}`;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+});
+

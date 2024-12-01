@@ -102,10 +102,16 @@ $_SESSION['cart_total'] = $totalPrice;
                                 <p><strong>{$item['name']}</strong></p>
                                 <p class='cart-price'>\${$itemTotal} <span>for ({$item['quantity']}) items</span></p>
                                 <form method='POST' action=''>
+                                    <input 
+                                        type='number' 
+                                        name='quantity' 
+                                        class='quantity' 
+                                        id='quantity_{$productId}' 
+                                        value='{$item['quantity']}' 
+                                        min='1' 
+                                        max='{$item['stock']}'
+                                    >
                                     <input type='hidden' name='product_id' value='{$productId}'>
-                                    <label for='quantity_{$productId}'>Quantity:</label>
-                                    <input type='number' name='quantity' id='quantity_{$productId}' value='{$item['quantity']}' min='1' max='{$item['stock']}'>
-                                    <button type='submit' name='update_quantity' class='update-button'>Update</button>
                                 </form>
                                 <form method='POST' action=''>
                                     <input type='hidden' name='product_id' value='{$productId}'>
@@ -114,7 +120,8 @@ $_SESSION['cart_total'] = $totalPrice;
                             </div>
                         </div>
                     ";
-                }                
+                }
+                                
             } else {
                 echo "<p>Your cart is empty.</p>";
             }

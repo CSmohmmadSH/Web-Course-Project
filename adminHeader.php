@@ -4,7 +4,7 @@
 
     <header class="header">
         <div class="logo">
-            <a href="adminPage.php">           
+            <a href="home.php">           
                 <img src="photos/image-removebg-preview.png" alt="Logo"> 
             </a>       
         </div>
@@ -12,6 +12,7 @@
             <input type="text" placeholder="What are you looking for?">
         </div>
         <div class="menu">
+            <a href="adminPage.php">Admin Dashboard</a>
             <a href="#"><img class="profile" src="photos/profile-picture.jpg" alt=""></a>
         </div>
     </header>

@@ -13,46 +13,36 @@ include 'DataBase.php';
         <h2>Featured Products</h2>
         <div class="product-grid">
             <?php
-            // Fetch product data
             $query = "SELECT product_id, name, price, stock, image_url FROM products";
             $result = mysqli_query($conn, $query);
 
             while ($row = mysqli_fetch_assoc($result)) {
-                // Determine stock status class
-                $stockClass = ($row['stock'] < 5) ? "low-stock" : "stock";
-                $outOfStock = $row['stock'] == 0; // Check if stock is 0
+                $outOfStock = $row['stock'] == 0;
+                $imageClass = $outOfStock ? "grayscale" : "";
 
-                // Display product details
                 echo "
                     <div class='product-card'>
                         <div class='product-image'>
-                            ";
-                
-                // Display product image if not out of stock
-                if ($outOfStock) {
-                    echo "<p class='out-of-stock'>Out of Stock</p>";
-                } else {
-                    // Fetch the image URL from the database and display it
-                    $imageUrl = $row['image_url']; // This assumes the URL is correct
-                    echo "<img src='{$imageUrl}' alt='{$row['name']}'>";
-                }
-
-                echo "
+                            <img src='{$row['image_url']}' alt='{$row['name']}' class='" . ($outOfStock ? "grayscale" : "") . "'>
+                                " . ($outOfStock ? "<p class='sad-text'>(out of stock)</p>" : "") . "
                         </div>
                         <h3>{$row['name']}</h3>
                         <p>Price: \${$row['price']}</p>
-                        <p class='{$stockClass}'>Stock: {$row['stock']} pieces</p>
+                            " . (!$outOfStock ? "<p class='stock'>Stock: {$row['stock']} pieces</p>" : "") . "
                         <form method='POST' action='cart.php'>
                             <input type='hidden' name='product_id' value='{$row['product_id']}'>
-                            <input type='number' name='quantity' value='1' min='1' max='{$row['stock']}' " . ($outOfStock ? "readonly" : "") . ">
+                            <input type='number' name='quantity' value='" . ($outOfStock ? "0" : "1") . "' min='1' max='{$row['stock']}' " . ($outOfStock ? "readonly" : "") . ">
                             <button type='submit' name='add_to_cart' " . ($outOfStock ? "disabled" : "") . ">Add to Cart</button>
                         </form>
                     </div>
+
+
                 ";
             }
             ?>
         </div>
     </section>
 </main>
+
 
 <?php include 'footer.php'; ?>

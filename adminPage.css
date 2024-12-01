@@ -1,52 +1,73 @@
-.menu a{
-    
+.menu a {
     margin-left: 0px;
-    }
-    
-    .profile {
-        margin-left: 0px;
-    }
-    
-    .admin-section {
-        max-width: 600px;
-        margin: auto;
-        padding: 20px;
-        background-color: #f8f8f8;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-    
-    .admin-section h2 {
-        margin-bottom: 20px;
-        font-size: 24px;
-    }
-    
-    .admin-section label {
-        display: block;
-        margin-top: 15px;
-        font-size: 16px;
-        text-align: left;
-    }
-    
-    .admin-section input, .admin-section textarea, .admin-section button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    
-    .admin-section button {
-        background-color: #00c3ff;
-        color: white;
-        cursor: pointer;
-        margin-top: 20px;
-        font-weight: bold;
-    }
-    
-    .admin-section button:hover {
-        background-color: #007bff;
-    }
-    
+}
+
+.profile {
+    margin-left: 0px;
+}
+
+.admin-section {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.admin-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.admin-section label {
+    display: block;
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.admin-section input,
+.admin-section textarea,
+.admin-section button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensures padding doesn't overflow */
+}
+
+.admin-section input[type="number"],
+.admin-section input[type="text"]
+{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: white; /* Ensure a consistent background color */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 560px;
+    box-sizing: border-box;
+}
+
+.admin-section button {
+    background-color: #00c3ff;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.admin-section button:hover {
+    background-color: #007bff;
+}
+
+.admin-section input[type="number"]::-webkit-inner-spin-button,
+.admin-section input[type="number"]::-webkit-outer-spin-button {
+    display: none; /* Hides the spinner for number inputs */
+}

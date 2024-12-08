@@ -1,23 +1,43 @@
-  document.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    const email = e.target.email.value;
-    const password = e.target.pwd.value;
-    const confirmPassword = e.target['confirm-pwd'].value;
+  const fullName = e.target['full-name'].value;
+  const email = e.target.email.value;
+  const password = e.target.pwd.value;
+  const confirmPassword = e.target['confirm-pwd'].value;
 
-    if (password !== confirmPassword) {
+  if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
-    }
+  }
 
-    try {
+  try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
-      alert('Registration successful!');
-      window.location.href = 'login.php'; // Redirect to the login page
-    } catch (error) {
+
+      const response = await fetch('users.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+              'full-name': fullName,
+              email: email,
+          }),
+      });
+
+      const result = await response.text();
+      if (response.ok) {
+          alert(result);
+          window.location.href = 'login.php';
+      } else {
+          alert('Error saving data: ' + result);
+      }
+  } catch (error) {
       alert(error.message);
-    }
-  });
+  }
+});
+
+
 
   var passwordField = document.getElementById("password-input");
   var passwordContainer = document.getElementById("password-container");

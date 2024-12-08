@@ -1,4 +1,6 @@
-<?php include 'header.php'; ?>
+<?php include 'header.php';
+    include 'users.php';
+ ?>
 
 
 <head>
@@ -27,7 +29,7 @@
 <body>
 
     <div class="container">
-        <form action="">
+        <form action="users.php" method="POST">
             <h1>Register</h1>
             <div class="form-group">
                 <label for="full-name">Full Name</label>
